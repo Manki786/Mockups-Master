@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOCKUPS MASTER V3 — Premium Etsy Mockups & Cinematic Video Generator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        etsy: {
+                            bg: '#FBF9F5',
+                            card: '#FFFFFF',
+                            border: '#E8E3D9',
+                            forest: '#1B3B2B',
+                            forestHover: '#132B1F',
+                            accent: '#D4A373',
+                            sage: '#E2E8F0',
+                            text: '#2D3748',
+                            muted: '#718096'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'Inter', '-apple-system', 'sans-serif'],
+                        serif: ['Playfair Display', 'Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-etsy-bg text-etsy-text font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- TOP NAVIGATION NAVBAR -->
+    <header class="bg-white border-b border-etsy-border sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-etsy-forest text-white flex items-center justify-center font-bold text-xl shadow-md">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <h1 class="text-xl font-bold tracking-tight text-etsy-forest font-serif">MOCKUPS MASTER <span class="text-amber-600 font-sans text-xs bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300 ml-1">V3 PRO</span></h1>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-emerald-300">
+                            <i class="fa-solid fa-shield-halved mr-1"></i> Product Lock Active
+                        </span>
+                    </div>
+                    <p class="text-xs text-etsy-muted">Create Premium Etsy Mockups & Cinematic Commercial Product Videos</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button id="api-key-btn" class="text-xs font-medium text-etsy-forest hover:text-emerald-700 bg-emerald-50 px-3.5 py-2 rounded-lg border border-emerald-200 transition flex items-center space-x-1.5 shadow-sm">
+                    <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i>
+                    <span id="api-key-status">Configure Gemini AI</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- API KEY MODAL -->
+    <div id="api-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-etsy-border">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-etsy-forest flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i> AI Image Generator Integration (DALL·E 3 & Gemini)
+                </h3>
+                <button id="close-api-modal" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-sm text-etsy-muted mb-4">
+                Enter your <strong>OpenAI API Key (sk-...)</strong> for ChatGPT DALL·E 3 HD photorealistic scene generation, or your Google Gemini API key.
+            </p>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">AI API Key (OpenAI DALL·E 3 or Gemini)</label>
+                    <input type="password" id="gemini-key-input" placeholder="sk-proj-... or AIzaSy..." class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-etsy-forest focus:outline-none">
+                </div>
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-900 space-y-1.5">
+                    <div><i class="fa-solid fa-star text-amber-500 mr-1"></i> <strong>OpenAI DALL·E 3</strong> generates high-definition photorealistic commercial scenes!</div>
+                    <div class="flex flex-wrap gap-3 pt-1 text-[11px]">
+                        <a href="https://platform.openai.com/api-keys" target="_blank" class="underline font-bold text-emerald-800">Get OpenAI DALL·E 3 Key <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank" class="underline font-bold text-amber-900">Get Google Gemini Key <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button id="save-api-key" class="bg-etsy-forest text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-etsy-forestHover transition">
+                        Save Key & Activate
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTENT -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- HERO INTRODUCTION & WORKFLOW STEPS -->
+        <section class="bg-gradient-to-r from-emerald-950 via-etsy-forest to-emerald-900 text-white rounded-3xl p-8 shadow-xl relative overflow-hidden">
+            <div class="relative z-10 max-w-3xl">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-800/80 text-emerald-200 border border-emerald-700/60 mb-4">
+                    <i class="fa-solid fa-star text-amber-400"></i> Reference-Based Art Direction Benchmark
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-serif mb-3 tracking-tight">Turn One Uploaded Printable into 10 Etsy Mockups & 3 Commercial Videos</h2>
+                <p class="text-emerald-100/90 text-sm leading-relaxed mb-6">
+                    Guaranteed pixel-faithful product preservation. Sourced directly from your original uploaded artwork without AI recreation or text modification.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3.5 border border-white/15">
+                        <div class="font-semibold text-emerald-200 mb-1"><i class="fa-solid fa-camera mr-1"></i> 10 Etsy Mockups</div>
+                        <div class="text-emerald-100/80">Hero, Wall, Desk, Person Holding, Printer, Detail & Step Guides.</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3.5 border border-white/15">
+                        <div class="font-semibold text-amber-200 mb-1"><i class="fa-solid fa-clackboard mr-1"></i> 3 Commercial Videos</div>
+                        <div class="text-amber-100/80">9:16 Instagram Reel, Facebook Reel & Etsy Listing Video.</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3.5 border border-white/15">
+                        <div class="font-semibold text-emerald-200 mb-1"><i class="fa-solid fa-lock mr-1"></i> Product Lock</div>
+                        <div class="text-emerald-100/80">Original source content locked 100% still across all frames.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: PRODUCT UPLOAD & PRODUCT LOCK -->
+        <section class="bg-white rounded-2xl p-6 shadow-sm border border-etsy-border space-y-6">
+            <div class="flex items-center justify-between border-b border-etsy-border pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-etsy-forest font-serif flex items-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-up text-etsy-accent"></i> Step 1 — Product Upload
+                    </h3>
+                    <p class="text-xs text-etsy-muted">Upload your original printable (PNG, JPG, or WEBP)</p>
+                </div>
+                <div id="product-lock-badge" class="hidden items-center gap-1.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-full">
+                    <i class="fa-solid fa-lock text-emerald-600"></i> Source Locked & Verified
+                </div>
+            </div>
+
+            <!-- Upload Drop Area -->
+            <div id="drop-zone" class="border-2 border-dashed border-gray-300 hover:border-etsy-forest rounded-2xl p-8 text-center bg-gray-50/50 hover:bg-emerald-50/20 transition cursor-pointer relative group">
+                <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" class="hidden">
+                <div id="upload-prompt" class="space-y-3">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-100 text-etsy-forest flex items-center justify-center text-2xl group-hover:scale-110 transition shadow-inner">
+                        <i class="fa-solid fa-file-image"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-etsy-forest">Click to upload or drag & drop artwork here</p>
+                        <p class="text-xs text-etsy-muted mt-1">Supports high-res PNG, JPG, WEBP printable designs</p>
+                    </div>
+                </div>
+
+                <!-- Preview State -->
+                <div id="upload-preview" class="hidden flex-col sm:flex-row items-center justify-between gap-6 p-2 text-left">
+                    <div class="flex items-center space-x-5">
+                        <img id="preview-img" class="w-28 h-36 object-contain rounded-lg border border-gray-200 shadow-md bg-white p-1">
+                        <div class="space-y-1">
+                            <h4 id="preview-filename" class="font-bold text-etsy-forest text-sm">product_artwork.png</h4>
+                            <div class="flex flex-wrap gap-2 text-xs text-etsy-muted">
+                                <span id="preview-dims" class="bg-gray-100 px-2 py-0.5 rounded font-mono">2480 × 3508 px</span>
+                                <span id="preview-orientation" class="bg-gray-100 px-2 py-0.5 rounded capitalize">Portrait</span>
+                                <span id="preview-checksum" class="bg-gray-100 px-2 py-0.5 rounded font-mono">SHA256 Verified</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="replace-file-btn" class="text-xs bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold px-4 py-2 rounded-lg transition flex items-center gap-1.5 shadow-sm">
+                        <i class="fa-solid fa-arrows-rotate"></i> Replace Artwork
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: INTELLIGENT PRODUCT ANALYSIS & CREATIVE BRIEF -->
+        <section id="analysis-section" class="hidden bg-white rounded-2xl p-6 shadow-sm border border-etsy-border space-y-6">
+            <div class="flex items-center justify-between border-b border-etsy-border pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-etsy-forest font-serif flex items-center gap-2">
+                        <i class="fa-solid fa-brain text-amber-500"></i> Step 2 — Product Analysis & Creative Strategy
+                    </h3>
+                    <p class="text-xs text-etsy-muted">Verified product identity, extracted color palette, and marketing hierarchy</p>
+                </div>
+                <button id="toggle-brief-btn" class="text-xs text-etsy-forest bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 hover:bg-emerald-100 font-medium transition">
+                    <i class="fa-solid fa-file-contract mr-1"></i> View Creative Brief
+                </button>
+            </div>
+
+            <!-- Analysis Details Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Category & Title Edit -->
+                <div class="space-y-4 md:col-span-2 bg-gray-50/60 p-4 rounded-xl border border-gray-200">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Detected Product Category</label>
+                        <span id="analysis-category" class="inline-block bg-emerald-100 text-emerald-900 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-300">
+                            Printable Planner & Guide
+                        </span>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Marketing Display Title</label>
+                        <input type="text" id="analysis-title" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-semibold focus:ring-2 focus:ring-etsy-forest focus:outline-none bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Marketing Subtitle</label>
+                        <input type="text" id="analysis-subtitle" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-etsy-forest focus:outline-none bg-white">
+                    </div>
+                </div>
+
+                <!-- Color Palette & Formats -->
+                <div class="space-y-4 bg-gray-50/60 p-4 rounded-xl border border-gray-200">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-2">Dominant Color Palette</label>
+                        <div id="palette-container" class="flex flex-wrap gap-2">
+                            <!-- Dynamically populated color swatches -->
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Confirmed Size Formats</label>
+                        <div id="formats-container" class="flex flex-wrap gap-1.5 text-xs">
+                            <span class="bg-gray-200 text-gray-800 px-2.5 py-1 rounded-md font-semibold">PDF Digital File</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Creative Brief Drawer -->
+            <div id="creative-brief-drawer" class="hidden bg-emerald-950 text-white rounded-xl p-5 border border-emerald-800 space-y-3 text-xs">
+                <h4 class="font-bold text-amber-400 uppercase tracking-wider text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-compass"></i> Internal Creative Strategy Brief
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <div class="text-emerald-300 font-semibold">Product Identity</div>
+                        <div id="brief-identity" class="text-gray-200">Printable Guide (Portrait)</div>
+                    </div>
+                    <div>
+                        <div class="text-emerald-300 font-semibold">Recommended Styling</div>
+                        <div id="brief-style" class="text-gray-200">Warm Minimalist Oak</div>
+                    </div>
+                    <div>
+                        <div class="text-emerald-300 font-semibold">Marketing Layout</div>
+                        <div id="brief-layout" class="text-gray-200">Reference-Inspired Portrait Grid</div>
+                    </div>
+                    <div>
+                        <div class="text-emerald-300 font-semibold">Video Strategy</div>
+                        <div id="brief-video" class="text-gray-200">4-Shot Sequence Hook</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: STYLE SELECTION & GENERATION CONTROLS -->
+        <section id="controls-section" class="hidden bg-white rounded-2xl p-6 shadow-sm border border-etsy-border space-y-6">
+            <div class="flex items-center justify-between border-b border-etsy-border pb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-etsy-forest font-serif flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i> Step 3 — Select AI Image Generator & Style
+                    </h3>
+                    <p class="text-xs text-etsy-muted">Choose your preferred AI background scene generator and studio aesthetic</p>
+                </div>
+            </div>
+
+            <!-- AI Scene Provider Selector -->
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 uppercase mb-2">AI Scene Provider (Background Generation Engine)</label>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="provider-card selected border-2 border-emerald-600 bg-emerald-50/70 p-4 rounded-xl cursor-pointer transition relative" data-provider="openai">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="font-bold text-emerald-950 text-sm flex items-center gap-1.5">
+                                <i class="fa-solid fa-robot text-emerald-600"></i> OpenAI DALL·E 3
+                            </span>
+                            <span class="badge text-[10px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded-full">Recommended</span>
+                        </div>
+                        <p class="text-xs text-emerald-900/80 mb-2">ChatGPT DALL·E 3 HD photorealistic commercial scenes ($0.04 / image).</p>
+                        <div class="text-[11px] font-mono text-emerald-700 font-semibold"><i class="fa-solid fa-coins mr-1"></i> Est. 10 Mockups: ~$0.40 USD</div>
+                    </div>
+                    <div class="provider-card border-2 border-transparent bg-gray-50 hover:bg-gray-100 p-4 rounded-xl cursor-pointer transition" data-provider="gemini">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="font-bold text-etsy-forest text-sm flex items-center gap-1.5">
+                                <i class="fa-solid fa-sparkles text-amber-500"></i> Google Gemini (Imagen 3)
+                            </span>
+                            <span class="badge text-[10px] bg-amber-500 text-white font-bold px-2 py-0.5 rounded-full">Imagen 3</span>
+                        </div>
+                        <p class="text-xs text-etsy-muted mb-2">Google AI Studio photorealistic environment generator ($0.03 / image).</p>
+                        <div class="text-[11px] font-mono text-amber-700 font-semibold"><i class="fa-solid fa-coins mr-1"></i> Est. 10 Mockups: ~$0.30 USD</div>
+                    </div>
+                    <div class="provider-card border-2 border-transparent bg-gray-50 hover:bg-gray-100 p-4 rounded-xl cursor-pointer transition" data-provider="composite">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <span class="font-bold text-etsy-forest text-sm flex items-center gap-1.5">
+                                <i class="fa-solid fa-layer-group text-blue-600"></i> Reference Composite
+                            </span>
+                            <span class="badge text-[10px] bg-blue-600 text-white font-bold px-2 py-0.5 rounded-full">FREE</span>
+                        </div>
+                        <p class="text-xs text-etsy-muted mb-2">High-res procedural studio composite renderer ($0.00 FREE fallback).</p>
+                        <div class="text-[11px] font-mono text-blue-700 font-semibold"><i class="fa-solid fa-circle-check mr-1"></i> $0.00 USD (Instant)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Style Selector Cards -->
+            <div>
+                <label class="block text-xs font-semibold text-gray-700 uppercase mb-2">Studio Aesthetic Preset</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="style-card selected border-2 border-etsy-forest bg-emerald-50/50 p-4 rounded-xl cursor-pointer transition relative" data-style="reference_based_premium">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-etsy-forest text-sm">Reference-Based Premium</h4>
+                            <span class="badge text-xs bg-etsy-forest text-white px-2 py-0.5 rounded">Default</span>
+                        </div>
+                        <p class="text-xs text-etsy-muted">Matched strictly to provided Etsy commercial reference images.</p>
+                    </div>
+                    <div class="style-card border-2 border-transparent bg-gray-50 hover:bg-gray-100 p-4 rounded-xl cursor-pointer transition" data-style="warm_minimalist">
+                        <h4 class="font-bold text-etsy-forest text-sm mb-1">Warm Minimalist Oak</h4>
+                        <p class="text-xs text-etsy-muted">Light oak wood, warm ivory linen, soft directional daylight.</p>
+                    </div>
+                    <div class="style-card border-2 border-transparent bg-gray-50 hover:bg-gray-100 p-4 rounded-xl cursor-pointer transition" data-style="natural_lifestyle">
+                        <h4 class="font-bold text-etsy-forest text-sm mb-1">Natural Lifestyle Interior</h4>
+                        <p class="text-xs text-etsy-muted">Cozy modern room decor, framed displays, natural houseplants.</p>
+                    </div>
+                    <div class="style-card border-2 border-transparent bg-gray-50 hover:bg-gray-100 p-4 rounded-xl cursor-pointer transition" data-style="product_matched">
+                        <h4 class="font-bold text-etsy-forest text-sm mb-1">Product-Matched Auto</h4>
+                        <p class="text-xs text-etsy-muted">Dynamically adapts complementary accent colors to product artwork.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-3 pt-2">
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <button id="test-hero-btn" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 font-bold px-5 py-3 rounded-xl shadow-sm transition flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-vial-circle-check text-amber-600"></i> Test 1 Hero Mockup Preview
+                    </button>
+                    <button id="gen-mockups-btn" class="bg-white hover:bg-emerald-50 text-etsy-forest font-bold px-6 py-3 rounded-xl border-2 border-etsy-forest shadow-sm hover:shadow transition flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-images text-emerald-700"></i> Generate 10 Etsy Mockups
+                    </button>
+                    <button id="gen-videos-btn" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-6 py-3 rounded-xl shadow-sm hover:shadow transition flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-film"></i> Generate 3 Commercial Videos
+                    </button>
+                    <button id="gen-all-btn" class="bg-etsy-forest hover:bg-etsy-forestHover text-white font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition flex items-center gap-2 text-sm scale-105">
+                        <i class="fa-solid fa-bolt text-amber-400"></i> Generate Complete Media Package (13 Assets)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: LIVE GENERATION PROGRESS -->
+        <section id="progress-section" class="hidden bg-white rounded-2xl p-6 shadow-sm border border-etsy-border space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-etsy-forest flex items-center gap-2">
+                        <i class="fa-solid fa-gear fa-spin text-emerald-600"></i> Rendering High-Resolution Media Package
+                    </h3>
+                    <p id="progress-status-text" class="text-xs text-etsy-muted">Applying homography & perspective compositing...</p>
+                </div>
+                <span id="progress-percent" class="text-lg font-extrabold text-etsy-forest font-mono">0%</span>
+            </div>
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div id="progress-bar-fill" class="bg-gradient-to-r from-emerald-600 to-amber-500 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: 10 ETSY MOCKUPS GALLERY -->
+        <section id="mockups-gallery-section" class="hidden space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-bold text-etsy-forest font-serif flex items-center gap-2">
+                    <i class="fa-solid fa-images text-etsy-accent"></i> 10 Reference-Based Etsy Mockups (2000×2000 PNG)
+                </h3>
+                <button id="download-mockups-zip-btn" class="text-xs font-bold bg-white text-etsy-forest border border-etsy-border hover:bg-emerald-50 px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-zipper text-emerald-600"></i> Download Mockups ZIP
+                </button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div id="mockups-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 10 Mockup Cards populated dynamically -->
+            </div>
+        </section>
+
+        <!-- SECTION 6: 3 CINEMATIC COMMERCIAL VIDEOS GALLERY -->
+        <section id="videos-gallery-section" class="hidden space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-bold text-etsy-forest font-serif flex items-center gap-2">
+                    <i class="fa-solid fa-film text-amber-500"></i> 3 Commercial 9:16 Vertical Videos (1080×1920 MP4)
+                </h3>
+                <button id="download-videos-zip-btn" class="text-xs font-bold bg-white text-etsy-forest border border-etsy-border hover:bg-amber-50 px-4 py-2 rounded-lg shadow-sm transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-zipper text-amber-600"></i> Download Videos ZIP
+                </button>
+            </div>
+
+            <!-- Video Cards Grid -->
+            <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 3 Video Cards populated dynamically -->
+            </div>
+        </section>
+
+        <!-- SECTION 7: COMPLETE MEDIA DOWNLOAD -->
+        <section id="complete-download-section" class="hidden bg-gradient-to-r from-emerald-900 to-etsy-forest text-white rounded-2xl p-8 shadow-xl text-center space-y-4">
+            <div class="w-16 h-16 mx-auto rounded-full bg-amber-400 text-emerald-950 flex items-center justify-center text-3xl shadow-lg">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="text-2xl font-bold font-serif">All 13 High-Resolution Assets Ready for Etsy!</h3>
+            <p class="text-xs text-emerald-100 max-w-xl mx-auto">Includes 10 high-res 2000×2000 PNG Etsy listing mockups and 3 commercial 9:16 MP4 promotional videos.</p>
+            <div class="pt-2">
+                <button id="download-complete-zip-btn" class="bg-amber-400 hover:bg-amber-300 text-emerald-950 font-extrabold text-base px-8 py-4 rounded-xl shadow-xl transition transform hover:scale-105 inline-flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> Download Complete Media Package ZIP
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FULLSCREEN IMAGE MODAL -->
+    <div id="image-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="relative max-w-4xl w-full flex flex-col items-center">
+            <button id="close-image-modal" class="absolute -top-12 right-0 text-white hover:text-gray-300 text-2xl"><i class="fa-solid fa-xmark"></i></button>
+            <img id="modal-img-display" class="max-h-[85vh] object-contain rounded-xl shadow-2xl bg-white p-2">
+            <div class="mt-4 flex gap-3">
+                <a id="modal-download-link" download class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-lg font-bold text-xs flex items-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-download"></i> Download High-Res PNG
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-etsy-border py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-etsy-muted">
+            MOCKUPS MASTER V3 — High-Resolution Etsy Product Photography & Commercial Video Generator Engine
+        </div>
+    </footer>
+
+    <!-- APP FRONTEND SCRIPT -->
+    <script src="app.js"></script>
+</body>
+</html>

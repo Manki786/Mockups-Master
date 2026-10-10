@@ -1,0 +1,51 @@
+/* ==========================================================================
+   MOCKUPS MASTER — PREMIUM STYLESHEET
+   ========================================================================== */
+
+/* Custom Animations & Transitions */
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(27, 59, 43, 0.15); }
+    50% { box-shadow: 0 0 25px rgba(27, 59, 43, 0.35); }
+}
+
+.mockup-card-active {
+    animation: pulseGlow 2s infinite;
+}
+
+/* Card Aspect Ratio Box */
+.aspect-square {
+    aspect-ratio: 1 / 1;
+}
+
+/* Custom Scrollbar for Gallery */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #F1EFE9;
+}
+::-webkit-scrollbar-thumb {
+    background: #C8C3B8;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #1B3B2B;
+}
+
+/* Paper Elevation Shadow Effect for Preview Cards */
+.paper-shadow {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+.paper-shadow-lg {
+    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.18), 0 10px 15px -5px rgba(0, 0, 0, 0.08);
+}
+
+/* Subtle Hover Zoom for Gallery */
+.hover-zoom-img {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .hover-zoom-img {
+    transform: scale(1.03);
+}
